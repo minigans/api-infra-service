@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: muti-protocol
+  annotations:
+    konghq.com/protocols: grpc,grpcs,http,https
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: kong
+  tls:
+    - hosts:
+        - all.mini.ping-fuji.com
+      secretName: all-tls
+  rules:
+    - host: all.mini.ping-fuji.com
+      http:
+        paths:
+          - path: /echo
+            pathType: Prefix
+            backend:
+              service:
+                name: echo
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grpcbin
+                port:
+                  number: 9001

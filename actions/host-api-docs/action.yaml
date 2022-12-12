@@ -1,0 +1,31 @@
+name: Generate and host protobuf docs
+description: Generate protobuf documentation and host it on the repo GitHub pages
+
+inputs:
+  proto-root-dir:
+    description: Root directory of protobuf files
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install protoc
+      uses: arduino/setup-protoc@v1
+
+    - name: Generate API docs
+      shell: bash
+      run: |-
+        cd "${PROTO_ROOT_DIR}"
+        curl -L https://github.com/pseudomuto/protoc-gen-doc/releases/download/v1.5.1/protoc-gen-doc_1.5.1_linux_amd64.tar.gz | tar -zxvf - 
+        rm -rf /tmp/generated-docs; mkdir -p /tmp/generated-docs
+        protoc --plugin=protoc-gen-doc=./protoc-gen-doc \
+            --doc_out=/tmp/generated-docs \
+            --doc_opt=html,index.html *.proto
+      env:
+        PROTO_ROOT_DIR: ${{ inputs.proto-root-dir }}
+
+    - name: Deploy generated docs on GitHub pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: /tmp/generated-docs

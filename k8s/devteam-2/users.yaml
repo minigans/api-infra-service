@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-admin-basic
+type: Opaque
+stringData:
+  username: admin
+  password: admin
+  kongCredType: basic-auth
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-user-basic
+type: Opaque
+stringData:
+  username: user
+  password: user
+  kongCredType: basic-auth
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-user-acl
+type: Opaque
+stringData:
+  group: users
+  kongCredType: acl
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-admin-acl
+type: Opaque
+stringData:
+  group: admins
+  kongCredType: acl
+
+---
+
+apiVersion: configuration.konghq.com/v1
+kind: KongConsumer
+metadata:
+  name: app-admin
+  annotations:
+    kubernetes.io/ingress.class: kong
+username: admin
+credentials:
+  - app-admin-basic
+  - app-admin-acl
+
+---
+
+apiVersion: configuration.konghq.com/v1
+kind: KongConsumer
+metadata:
+  name: app-user
+  annotations:
+    kubernetes.io/ingress.class: kong
+username: user
+credentials:
+  - app-user-basic
+  - app-user-acl

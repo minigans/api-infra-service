@@ -1,0 +1,30 @@
+# Ref: https://docs.konghq.com/hub/kong-inc/basic-auth
+# Both GET/POST ingresses are annotated to use this plugin
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: basic-auth
+plugin: basic-auth
+
+---
+
+# Only the POST ingress is annotated to use this plugin; so only admin users can send POST requests.
+# Admin users can also send GET requests.
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: admin-acl
+plugin: acl
+config:
+  allow: [ 'admins' ]
+
+---
+
+# Both GET/POST ingresses are annotated to use this plugin; so both admin and non-admin users can send GET requests.
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: user-acl
+plugin: acl
+config:
+  allow: [ 'users', 'admins' ]

@@ -1,0 +1,27 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: devteam-1
+
+resources:
+  # dev team 1 http services
+  - https://bit.ly/echo-service
+  - external-http-service.yaml
+  - http-ingress.yaml
+
+  # dev team 1 GRPC service
+  - https://bit.ly/grpcbin-service
+  - grpc-ingress.yaml
+
+  # multi-protocol ingress
+  - multi-protocol-ingress.yaml
+
+patchesStrategicMerge:
+  # Annotate the GRPC service to use GRPC protocol - default is http
+  - |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: grpcbin
+      annotations:
+        konghq.com/protocol: grpcs

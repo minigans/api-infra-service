@@ -1,0 +1,9 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+resources:
+  # Let's encrypt certificate issuer for all teams
+  - clusterissuer.yaml
+
+  # Namespace for each dev teams
+  - namespaces.yaml

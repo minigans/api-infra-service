@@ -1,0 +1,53 @@
+# Allows admin and non-admin users to send GET requests to the service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dev2-httpbin-get
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    konghq.com/plugins: basic-auth,user-acl
+spec:
+  ingressClassName: kong
+  tls:
+    - hosts:
+        - dev2-httpbin.mini.ping-fuji.com
+      secretName: dev2-httpbin-tls
+  rules:
+    - host: dev2-httpbin.mini.ping-fuji.com
+      http:
+        paths:
+          - path: /get
+            pathType: Prefix
+            backend:
+              service:
+                name: dev2-httpbin
+                port:
+                  number: 80
+
+---
+
+# Allows only admin users to send POST requests to the service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dev2-httpbin-post
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    konghq.com/plugins: basic-auth,admin-acl
+spec:
+  ingressClassName: kong
+  tls:
+    - hosts:
+        - dev2-httpbin.mini.ping-fuji.com
+      secretName: dev2-httpbin-tls
+  rules:
+    - host: dev2-httpbin.mini.ping-fuji.com
+      http:
+        paths:
+          - path: /post
+            pathType: Prefix
+            backend:
+              service:
+                name: dev2-httpbin
+                port:
+                  number: 80

@@ -1,0 +1,48 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+
+deploy:
+  kustomize:
+    paths:
+      - k8s/cluster-wide
+      - k8s/devteam-1
+      - k8s/devteam-2
+
+  helm:
+    releases:
+      # https://github.com/Kong/charts/tree/main/charts/kong
+      - name: kong
+        namespace: kong
+        createNamespace: true
+        repo: https://charts.konghq.com
+        remoteChart: kong
+        version: 2.13.1
+
+      # https://github.com/bitnami/charts/blob/main/bitnami/external-dns
+      - name: external-dns
+        namespace: external-dns
+        createNamespace: true
+        repo: https://charts.bitnami.com/bitnami
+        remoteChart: external-dns
+        version: 6.12.1
+        setValues:
+          serviceAccount:
+            annotations:
+              iam\.gke\.io/gcp-service-account: "external-dns@savitha-sandbox.iam.gserviceaccount.com"
+          provider: google
+          google:
+            project: savitha-sandbox
+          policy: upsert
+
+      # https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager
+      - name: cert-manager
+        namespace: cert-manager
+        createNamespace: true
+        repo: https://charts.jetstack.io
+        remoteChart: cert-manager
+        version: v1.10.1
+        setValues:
+          serviceAccount:
+            annotations:
+              iam\.gke\.io/gcp-service-account: "cert-manager@savitha-sandbox.iam.gserviceaccount.com"
+          installCRDs: true

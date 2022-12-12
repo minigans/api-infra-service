@@ -1,0 +1,27 @@
+name: Publish API docs for service
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: 'write'
+
+jobs:
+  helm-charts:
+    name: Publish API docs for service to repo GitHub pages
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the source code
+      - name: Check out this repo
+        uses: actions/checkout@v3
+
+      # Example of how to host API docs on repo's GitHub pages.
+      # For this repo, docs will be available at: https://minigans.github.io/api-infra-cluster/
+      - name: Deploy API docs to GitHub pages
+        uses: minigans/api-infra-cluster/actions/host-api-docs@main
+        with:
+          proto-root-dir: sample-proto-files

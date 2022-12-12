@@ -1,0 +1,15 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: devteam-2
+
+resources:
+  # Configures a basic-auth authentication kong plugin
+  - kong-plugins.yaml
+
+  # devteam-2 service and ingress
+  - service.yaml
+  - ingress.yaml
+
+  # devteam-2 users and authentication/authorization specs
+  - users.yaml
