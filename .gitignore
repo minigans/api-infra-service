@@ -1,0 +1,6 @@
+# Mac cruft
+.DS_Store
+
+# IntelliJ
+.idea/
+**.iml
