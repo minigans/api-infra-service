@@ -4,7 +4,7 @@
 PROJECT_ID=savitha-sandbox
 PROJECT_NUMBER=841033157812
 
-REPO=minigans/api-infra-cluster
+REPO=minigans/api-infra-service
 
 ## Create the workload identity pool and provider for Github actions.
 gcloud iam workload-identity-pools create oidc-pool \

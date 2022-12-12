@@ -20,8 +20,8 @@ jobs:
         uses: actions/checkout@v3
 
       # Example of how to host API docs on repo's GitHub pages.
-      # For this repo, docs will be available at: https://minigans.github.io/api-infra-cluster/
+      # For this repo, docs will be available at: https://minigans.github.io/api-infra-service
       - name: Deploy API docs to GitHub pages
-        uses: minigans/api-infra-cluster/actions/host-api-docs@main
+        uses: minigans/api-infra-service/actions/host-api-docs@main
         with:
           proto-root-dir: sample-proto-files
