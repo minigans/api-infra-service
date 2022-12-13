@@ -9,7 +9,7 @@ The API infrastructure service currently only supports basic authentication. It 
 controller configured with appropriate plugins for both authentication and authorization purposes. The `basic-auth` 
 `kong` plugin is used for authentication and the `acl` plugin for authorization.
 
-The `Kubernetes` manifests under the example (devteam-2)[k8s/devteam-2] directory show how to declaratively create 
+The `Kubernetes` manifests under the example [devteam-2](k8s/devteam-2) directory show how to declaratively create 
 users and basic authentication credentials for those users. For authorization, the users are assigned to specific 
 groups, and permissions are granted at the group level. 
 
@@ -26,13 +26,13 @@ Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/c
 The API infrastructure service provides the ability to route different parts of an API to different resources or 
 services. This functionality is automatically provided by the `kong` ingress controller.
 
-The `Kubernetes` manifests under the example (devteam-1)[k8s/devteam-1] directory show how to declaratively create 
+The `Kubernetes` manifests under the example [devteam-1](k8s/devteam-1) directory show how to declaratively create 
 ingresses of various kinds.
 
-- The (grpc-ingress.yaml)[k8s/devteam-1/grpc-ingress.yaml] shows how to route to a gRPC service.
-- The (http-ingress.yaml)[k8s/devteam-1/http-ingress.yaml] shows how different paths can route to the same backend 
+- The [grpc-ingress.yaml](k8s/devteam-1/grpc-ingress.yaml) shows how to route to a gRPC service.
+- The [http-ingress.yaml](k8s/devteam-1/http-ingress.yaml) shows how different paths can route to the same backend 
   service and how different host headers can route to different backend services.
-- The (multi-protocol-ingress.yaml)[k8s/devteam-1/multi-protocol.yaml] shows how different paths can route to different 
+- The [multi-protocol-ingress.yaml](k8s/devteam-1/multi-protocol.yaml) shows how different paths can route to different 
   backend services using different protocols (one REST and the other gRPC).
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/getting-started
@@ -40,7 +40,7 @@ Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/g
 ## Support for both grpc-based and REST-based connections using a unified protocol buffer repository
 
 The API infrastructure service supports both REST and gRPC APIs. This functionality is automatically provided by the 
-`kong` ingress controller. The `Kubernetes` manifests under the example (devteam-1)[k8s/devteam-1] directory show how 
+`kong` ingress controller. The `Kubernetes` manifests under the example [devteam-1](k8s/devteam-1) directory show how 
 to declaratively create ingresses of both kinds.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/using-ingress-with-grpc
@@ -64,9 +64,9 @@ Reference: https://cert-manager.io/docs/usage/ingress
 ## API documentation generation
 
 The API infrastructure service provides tooling (via `GitHub Actions`) to auto-generate API docs for a service. 
-Currently, only protobuf/gRPC API spec is supported. The (host-api-docs)[actions/host-api-docs/action.yaml] action will 
+Currently, only protobuf/gRPC API spec is supported. The [host-api-docs](actions/host-api-docs/action.yaml) action will 
 generate HTML docs for `.proto` files under a specified directory as long as they are tagged with appropriate comments 
-per IDL specifications. An example is available in the (Vehicle.proto)[sample-proto-files/Vehicle.proto] file. The 
+per IDL specifications. An example is available in the [Vehicle.proto](sample-proto-files/Vehicle.proto) file. The 
 generated docs are then hosted on the repo's GitHub pages.
 
 A service needing docs generated/hosted in its repo's GitHub pages may do so by invoking this action from their GitHub 
