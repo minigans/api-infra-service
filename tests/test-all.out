@@ -1,0 +1,41 @@
+$ ./test-all.sh
+Running test devteam-1/grpcs-test.sh:
+
+{
+  "reply": "hello Kong Hello world using grcpbin ingress!"
+}
+{
+  "reply": "hello Kong Hello world using multi-protocol ingress!"
+}
+
+---
+
+Running test devteam-1/https-test.sh:
+
+Request: https://echo.mini.ping-fuji.com; expected_code: 200; actual_code: 200
+Request: https://httpbin.mini.ping-fuji.com; expected_code: 200; actual_code: 200
+Request: https://svc.mini.ping-fuji.com/echo1; expected_code: 200; actual_code: 200
+Request: https://svc.mini.ping-fuji.com/echo2; expected_code: 200; actual_code: 200
+Request: https://all.mini.ping-fuji.com/echo; expected_code: 200; actual_code: 200
+Request: -X POST https://httpbin.mini.ping-fuji.com/post; expected_code: 200; actual_code: 200
+Request: https://httpbin.mini.ping-fuji.com/does-not-exist; expected_code: 404; actual_code: 404
+Request: -X GET https://httpbin.mini.ping-fuji.com/post; expected_code: 405; actual_code: 405
+Request: -X GET https://httpbin.mini.ping-fuji.com/status/500; expected_code: 500; actual_code: 500
+
+---
+
+Running test misc-tests/test-api-docs.sh:
+
+Request: https://minigans.github.io/api-infra-service; expected_code: 301; actual_code: 301
+
+---
+
+Running test devteam-2/https-test.sh:
+
+Request: https://dev2-httpbin.mini.ping-fuji.com/get; expected_code: 401; actual_code: 401
+Request: -X POST https://dev2-httpbin.mini.ping-fuji.com/post; expected_code: 401; actual_code: 401
+Request: -u user:password-not-right https://dev2-httpbin.mini.ping-fuji.com/get; expected_code: 401; actual_code: 401
+Request: -u user:user https://dev2-httpbin.mini.ping-fuji.com/get; expected_code: 200; actual_code: 200
+Request: -u user:user -X POST https://dev2-httpbin.mini.ping-fuji.com/post; expected_code: 403; actual_code: 403
+Request: -u admin:admin https://dev2-httpbin.mini.ping-fuji.com/get; expected_code: 200; actual_code: 200
+Request: -u admin:admin -X POST https://dev2-httpbin.mini.ping-fuji.com/post; expected_code: 200; actual_code: 200
