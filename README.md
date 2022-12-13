@@ -32,12 +32,12 @@ ingresses of various kinds.
 - The [grpc-ingress.yaml](k8s/devteam-1/grpc-ingress.yaml) shows how to route to a gRPC service.
 - The [http-ingress.yaml](k8s/devteam-1/http-ingress.yaml) shows how different paths can route to the same backend 
   service and how different host headers can route to different backend services.
-- The [multi-protocol-ingress.yaml](k8s/devteam-1/multi-protocol.yaml) shows how different paths can route to different 
-  backend services using different protocols (one REST and the other gRPC).
+- The [multi-protocol-ingress.yaml](k8s/devteam-1/multi-protocol-ingress.yaml) shows how different paths can route to 
+  different backend services using different protocols (one REST and the other gRPC).
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/getting-started
 
-## Support for both grpc-based and REST-based connections using a unified protocol buffer repository
+## Support for both grpc-based and REST-based connections
 
 The API infrastructure service supports both REST and gRPC APIs. This functionality is automatically provided by the 
 `kong` ingress controller. The `Kubernetes` manifests under the example [devteam-1](k8s/devteam-1) directory show how 
