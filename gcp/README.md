@@ -10,7 +10,7 @@ intended to simulate the environment provided by the API infrastructure service.
 The [wif.sh](wif.sh) script was used to set up a workload identity pool and a `Github` provider within the pool. 
 Workload identity federation allows the `Github Actions` runners (which is used for CI/CD) to impersonate the 
 `github@savitha-sandbox.iam.gserviceaccount.com` GCP service account and exchange the `GitHub` ID token for a 
-short-lived `Google Cloud` access token. This GCP service accounts gives the runners the appropriate access to `Google 
+short-lived `Google Cloud` access token. This GCP service account gives the runners the appropriate access to `Google 
 Cloud` resources.
 
 Reference: https://cloud.google.com/iam/docs/configuring-workload-identity-federation#gcloud

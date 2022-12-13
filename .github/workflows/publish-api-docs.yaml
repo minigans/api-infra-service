@@ -10,7 +10,7 @@ permissions:
   contents: 'write'
 
 jobs:
-  helm-charts:
+  publish-api-docs:
     name: Publish API docs for service to repo GitHub pages
     runs-on: ubuntu-latest
 
@@ -19,7 +19,7 @@ jobs:
       - name: Check out this repo
         uses: actions/checkout@v3
 
-      # Example of how to host API docs on repo's GitHub pages.
+      # Example of how to host API docs on repo's GitHub pages
       # For this repo, docs will be available at: https://minigans.github.io/api-infra-service
       - name: Deploy API docs to GitHub pages
         uses: minigans/api-infra-service/actions/host-api-docs@main
