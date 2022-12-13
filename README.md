@@ -21,7 +21,7 @@ users are allowed to send GET requests.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/configure-acl-plugin
 
-## Ingress/route management with the ability to route parts of an API to different resources/services
+## Ingress/route management
 
 The API infrastructure service provides the ability to route different parts of an API to different resources or 
 services. This functionality is automatically provided by the `kong` ingress controller.
