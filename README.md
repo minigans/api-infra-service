@@ -45,7 +45,7 @@ to declaratively create ingresses of both kinds.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/using-ingress-with-grpc
 
-## PKI and Certificate management
+## PKI and certificate management
 
 The API infrastructure service leverages ACME for certificate management using `cert-manager` as the ACME client and 
 `Let's Encrypt` as the ACME server. Automatic certificate issuance works by proving to the certificate issuer that 
