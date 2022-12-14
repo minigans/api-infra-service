@@ -32,7 +32,7 @@ deploy:
           provider: google
           google:
             project: savitha-sandbox
-          policy: upsert
+          policy: upsert-only
 
       # https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager
       - name: cert-manager
