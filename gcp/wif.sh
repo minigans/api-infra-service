@@ -24,7 +24,7 @@ gcloud iam workload-identity-pools providers create-oidc github-provider \
 gcloud iam service-accounts create github --project "${PROJECT_ID}"
 gcloud iam service-accounts add-iam-policy-binding --project "${PROJECT_ID}" \
     --role roles/iam.workloadIdentityUser \
-    --member "principalSet://iam.googleapis.com/projects/"${PROJECT_NUMBER}"/locations/global/workloadIdentityPools/oidc-pool/attribute.repository/${REPO}" \
+    --member "principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/oidc-pool/attribute.repository/${REPO}" \
     github@"${PROJECT_ID}".iam.gserviceaccount.com
 
 ## Grant the "github" GCP SA permissions to deploy to GKE
