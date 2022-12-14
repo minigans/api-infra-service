@@ -1,7 +1,7 @@
 # API infrastructure service
 
-Service owners may host their services on the API infrastructure running on `Kubernetes`. It provides the following 
-features:
+Service owners may host their services on the API infrastructure service. It runs on `Kubernetes` and provides the 
+following features:
 
 ## Authentication to API and authorization for individual API routes
 
@@ -70,7 +70,7 @@ per IDL specifications. An example is available in the [Vehicle.proto](sample-pr
 generated docs are then hosted on the repo's GitHub pages.
 
 A service needing docs generated/hosted in its repo's GitHub pages may do so by invoking this action from a GitHub 
-workflow as show below:
+workflow as shown below:
 
 ```
 jobs:
