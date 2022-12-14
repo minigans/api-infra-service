@@ -1,3 +1,7 @@
+## NOTE: secrets should never be in source control. These are just here for demo purposes.
+# A better approach would be to use the Kubernetes external-secrets operator to get secrets into the cluster
+# from GCP secret manager where secrets are encrypted at rest. Ref: https://external-secrets.io
+
 apiVersion: v1
 kind: Secret
 metadata:
