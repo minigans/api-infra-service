@@ -4,10 +4,14 @@ kind: Config
 deploy:
   kustomize:
     paths:
-      - k8s/cluster-wide
+      # Part of API infrastructure service
+      - k8s/api-service
+
+      # Example dev teams using the infrastructure service
       - k8s/devteam-1
       - k8s/devteam-2
 
+  # Infrastructure service charts
   helm:
     releases:
       # https://github.com/Kong/charts/tree/main/charts/kong
