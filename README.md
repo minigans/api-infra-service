@@ -14,10 +14,10 @@ users and basic authentication credentials for those users. For authorization, t
 groups, and permissions are granted at the group level. 
 
 A `KongConsumer` custom resource is set up for each user with the `basic-auth` and `acl` credentials giving them 
-authentication credentials and memberships to groups. The `acl` `KongPlugin` resource configures an allow-list of 
-groups. Finally, the ingress is configured with the auth/acl plugins to apply using the `konghq.com/plugins` annotation. 
-In the example, only admin users are allowed to send POST requests to the service, but both admin and non-admin 
-users are allowed to send GET requests.  
+authentication credentials and memberships to groups, respectively. The `acl` `KongPlugin` resource configures an 
+allow-list of groups. Finally, the ingress is configured with the auth/acl plugins to apply using the 
+`konghq.com/plugins` annotation. In the example, only admin users are allowed to send POST requests to the service, 
+but both admin and non-admin users are allowed to send GET requests.  
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/configure-acl-plugin
 
@@ -69,8 +69,8 @@ generate HTML docs for `.proto` files under a specified directory as long as the
 per IDL specifications. An example is available in the [Vehicle.proto](sample-proto-files/Vehicle.proto) file. The 
 generated docs are then hosted on the repo's GitHub pages.
 
-A service needing docs generated/hosted in its repo's GitHub pages may do so by invoking this action from their GitHub 
-workflows as show below:
+A service needing docs generated/hosted in its repo's GitHub pages may do so by invoking this action from a GitHub 
+workflow as show below:
 
 ```
 jobs:
@@ -85,7 +85,8 @@ jobs:
           proto-root-dir: sample-proto-files
 ```
 
-For example, the example API docs for this repo are available at https://minigans.github.io/api-infra-service.
+For example, the example API docs for this repo are available at https://minigans.github.io/api-infra-service. They 
+were generated and published by the [publish-api-docs.yaml](.github/workflows/publish-api-docs.yaml) GitHub workflow.
 
 References:
 - https://github.com/pseudomuto/protoc-gen-doc

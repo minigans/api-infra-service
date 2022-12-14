@@ -1,6 +1,6 @@
 ### Set up GCP resources
 
-Set up GCP resources using the [README.doc](gcp/README.md) in the [gcp](gcp) directory. The `gcloud` CLI tool and 
+Set up GCP resources using the [README.doc](../gcp/README.md) in the [gcp](../gcp) directory. The `gcloud` CLI tool and 
 a `Google` account are required pre-requisites for this step. 
 
 References:
@@ -22,7 +22,7 @@ Reference: https://skaffold.dev/docs
 
 ### Set up the API infrastructure service
 
-The [skaffold.yaml](skaffold.yaml) file declares the `Kubernetes` manifests and `Helm` charts to install in the 
+The [skaffold.yaml](../skaffold.yaml) file declares the `Kubernetes` manifests and `Helm` charts to install in the 
 cluster to configure and test the API infrastructure service. To bring up the infrastructure service, simply run the 
 following command from the root directory of this repo:
 
@@ -32,11 +32,12 @@ skaffold deploy
 
 ### Testing the service
 
-A few basic tests are available under the [tests](tests) directory. Use these steps to run them all:
+A few basic tests are available under the [tests](../tests) directory. The `test-all.sh` convenience script may be 
+used to run them all:
 
 ```bash
-cd tests
-./test-all.sh
+tests/test-all.sh
 ```
 
-The [test-all.out](tests/test-all.out) file shows sample output for the currently deployed ingresses and docs.
+The [test-all.out](https://gist.github.com/minigans/9053609fff860dfcb3fcf2f80d60e01e) snippet shows sample output for 
+the currently deployed ingresses and docs.

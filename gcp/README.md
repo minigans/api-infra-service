@@ -25,5 +25,5 @@ The [k8s-iam.sh](k8s-iam.sh) script was used to set up IAM permissions for the `
 
 The [dns.sh](dns.sh) script was used to set up a public hosted zone (`mini.ping-fuji.com`) on `Google Cloud DNS`. 
 This zone is managed by the `external-dns` service running within `Kubernetes`. The `cert-manager` service also uses 
-it to solve the ACME challenge from `Letsencrypt` to automatically obtain valid CA certificates for endpoints under 
+it to solve the ACME challenge from `Let's Encrypt` to automatically obtain valid CA certificates for endpoints under 
 this domain.
