@@ -1,7 +1,7 @@
 # API infrastructure service
 
 Service owners may host their services on the API infrastructure service. It runs on `Kubernetes` and provides the 
-following features:
+following features.
 
 ## Authentication to API and authorization for individual API routes
 
@@ -40,8 +40,10 @@ Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/g
 ## Support for both grpc-based and REST-based connections
 
 The API infrastructure service supports both REST and gRPC APIs. This functionality is automatically provided by the 
-`kong` ingress controller. The `Kubernetes` manifests under the example [devteam-1](k8s/devteam-1) directory show how 
-to declaratively create ingresses of both kinds.
+`kong` ingress controller. An ingress resource must be annotated with `konghq.com/protocols` to configure it with the 
+API types to use on the backend. This may be a comma-separated list of any combination of `http,https,grpc,grpcs`. The 
+`Kubernetes` manifests under the example [devteam-1] (k8s/devteam-1) directory show how to declaratively create 
+ingresses of both kinds.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/using-ingress-with-grpc
 
@@ -86,7 +88,8 @@ jobs:
 ```
 
 For example, the example API docs for this repo are available at https://minigans.github.io/api-infra-service. They 
-were generated and published by the [publish-api-docs.yaml](.github/workflows/publish-api-docs.yaml) GitHub workflow.
+were generated and published by this repo's [publish-api-docs.yaml](.github/workflows/publish-api-docs.yaml) `GitHub 
+Actions` workflow.
 
 References:
 - https://github.com/pseudomuto/protoc-gen-doc
