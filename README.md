@@ -42,7 +42,7 @@ Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/g
 The API infrastructure service supports both REST and gRPC APIs. This functionality is automatically provided by the 
 `kong` ingress controller. An ingress resource must be annotated with `konghq.com/protocols` to configure it with the 
 API types to use on the backend. This may be a comma-separated list of any combination of `http,https,grpc,grpcs`. The 
-`Kubernetes` manifests under the example [devteam-1] (k8s/devteam-1) directory show how to declaratively create 
+`Kubernetes` manifests under the example [devteam-1](k8s/devteam-1) directory show how to declaratively create 
 ingresses of both kinds.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/using-ingress-with-grpc
