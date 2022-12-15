@@ -7,8 +7,8 @@ cluster within the project. This is intended to simulate the environment provide
 
 ## Workload identity federation
 
-The [wif.sh](wif.sh) script was used to set up a workload identity pool and a `Github` provider within the pool.
-Workload identity federation allows the `Github Actions` runners (which is used for CI/CD) to impersonate the
+The [wif.sh](wif.sh) script was used to set up a workload identity pool and a `GitHub` provider within the pool.
+Workload identity federation allows the `GitHub Actions` runners (which is used for CI/CD) to impersonate the
 `github@savitha-sandbox.iam.gserviceaccount.com` GCP service account and exchange the `GitHub` ID token for a
 short-lived `Google Cloud` access token. This GCP service account gives the runners permissions to deploy to GKE.
 
