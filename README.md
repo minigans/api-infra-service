@@ -61,7 +61,7 @@ ingresses of various kinds.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/getting-started
 
-## Support for both grpc-based and REST-based connections
+## Support for both gRPC-based and REST-based connections
 
 The API infrastructure service supports both REST and gRPC APIs. This functionality is automatically provided by the 
 `kong` ingress controller. An ingress resource must be annotated with `konghq.com/protocols` to configure it with the 
