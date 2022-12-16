@@ -10,10 +10,23 @@ deploy:
       # Example dev teams using the infrastructure service
       - k8s/devteam-1
       - k8s/devteam-2
+      - k8s/oauth2-authentication-example
 
   # Infrastructure service charts
   helm:
     releases:
+      # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx
+      - name: ingress-nginx
+        namespace: ingress-nginx
+        createNamespace: true
+        repo: https://kubernetes.github.io/ingress-nginx
+        remoteChart: ingress-nginx
+        version: v4.4.0
+        setValues:
+          controller:
+            admissionWebhooks:
+              enabled: false
+
       # https://github.com/Kong/charts/tree/main/charts/kong
       - name: kong
         namespace: kong

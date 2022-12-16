@@ -21,6 +21,28 @@ but both admin and non-admin users are allowed to send GET requests.
 
 Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/configure-acl-plugin
 
+### OAuth2 authentication
+
+A better approach to authentication is to use identity federation through the OAuth2 protocol. The [oauth2-proxy.
+yaml](k8s/api-service/oauth2-proxy.yaml) manifest installs an OAuth2 proxy into the cluster. An application can 
+configure its ingress to use the proxy for authentication. If a user is not authenticated, the proxy will intercept 
+their request and delegate it to the Google Identity Provider (IdP) for authentication. After authentication, the 
+request is redirected back to the original application. The following diagram illustrates this flow:
+
+![OAuth2 authentication](docs/images/oauth2-authn.png)
+
+The `Kubernetes` manifests under the [oauth2-authentication-example](k8s/oauth2-authentication-example) directory 
+show how this works using the `nginx-ingress-controller`. When a user browses to https://hello.mini.ping-fuji.com, they 
+will first be redirected to authenticate using their Google credentials. The app is only presented to the user after a 
+successful login.
+
+While this works for authentication, the `nginx-ingress-controller` does not provide any mechanism to authorize a 
+user for access to specific APIs.
+
+References:
+- https://github.com/oauth2-proxy/oauth2-proxy
+- https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth
+
 ## Ingress/route management
 
 The API infrastructure service provides the ability to route different parts of an API to different resources or 

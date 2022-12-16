@@ -1,0 +1,86 @@
+# This manifest is a modification of the one found in the following ingress-nginx example:
+# https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/docs/examples/auth/oauth-external-auth/oauth2-proxy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: oauth2-proxy
+  name: oauth2-proxy
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: oauth2-proxy
+  template:
+    metadata:
+      labels:
+        k8s-app: oauth2-proxy
+    spec:
+      containers:
+        - name: oauth2-proxy
+          # The following instructions were used to set up Google as the Identity Provider
+          # https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider#google-auth-provider
+          args:
+            - --provider=google
+            - --email-domain=*
+            - --upstream=file:///dev/null
+            - --http-address=0.0.0.0:4180
+            - --whitelist-domain=".mini.ping-fuji.com"
+            - --cookie-domain=".mini.ping-fuji.com"
+          envFrom:
+            # The following environment variables are made available through the "oauth-secrets" secret. This secret
+            # was pre-created on the sandbox cluster. A better alternative is to use the external-secrets operator.
+            # OAUTH2_PROXY_CLIENT_ID, OAUTH2_PROXY_CLIENT_SECRET, OAUTH2_PROXY_COOKIE_SECRET
+            - secretRef:
+                name: oauth-secrets
+          image: quay.io/oauth2-proxy/oauth2-proxy:v7.2.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4180
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: oauth2-proxy
+  name: oauth2-proxy
+  namespace: kube-system
+spec:
+  ports:
+    - name: http
+      port: 4180
+      protocol: TCP
+      targetPort: 4180
+  selector:
+    k8s-app: oauth2-proxy
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oauth2-proxy
+  namespace: kube-system
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: oauth2-proxy.mini.ping-fuji.com
+      http:
+        paths:
+          - path: /oauth2
+            pathType: Prefix
+            backend:
+              service:
+                name: oauth2-proxy
+                port:
+                  number: 4180
+  tls:
+    - hosts:
+        - oauth2-proxy.mini.ping-fuji.com
+      secretName: oauth2-proxy-cert

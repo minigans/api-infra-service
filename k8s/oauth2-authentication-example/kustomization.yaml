@@ -1,0 +1,9 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: oauth2-authentication-example
+
+resources:
+  # Team's service and ingress
+  - https://bit.ly/echo-service
+  - ingress.yaml

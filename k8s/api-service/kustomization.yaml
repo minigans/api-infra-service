@@ -5,5 +5,8 @@ resources:
   # Let's Encrypt certificate issuer for all teams
   - clusterissuer.yaml
 
+  # Configure OAuth2 authentication using Google IdP
+  - oauth2-proxy.yaml
+
   # Namespace for each dev teams
   - namespaces.yaml

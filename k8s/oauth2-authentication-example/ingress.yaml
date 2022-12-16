@@ -1,0 +1,26 @@
+# Reference: https://kubernetes.github.io/ingress-nginx/examples/auth/oauth-external-auth/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-with-oauth2-authn
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.mini.ping-fuji.com/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.mini.ping-fuji.com/oauth2/start?rd=$scheme://$host$escaped_request_uri"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hello.mini.ping-fuji.com
+      secretName: hello-with-oauth2-authn-tls
+  rules:
+    - host: hello.mini.ping-fuji.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: echo
+                port:
+                  number: 80
