@@ -1,0 +1,58 @@
+## Example RBAC restricting deployment/view access to infrastructure cluster
+
+# Limit deployment to namespace "devteam-1" to the "devteam-1" GCP service account in sandbox project.
+#
+# References:
+# - https://cloud.google.com/deploy/docs/securing/sa-by-namespace
+#
+# Steps:
+# - Create a GCP service account named "devteam-1" for dev team 1 in sandbox project.
+# - Grant service account "roles/container.clusterViewer" so it can authenticate to the cluster but do nothing else.
+# - Use Kubernetes RBAC (shown below) to grant the service account "admin" role in namespace "devteam-1".
+# - Allow their GitHub repo to impersonate the GCP service account for CI/CD as shown in the gcp/wif.sh script.
+#
+# To verify, run:
+#   $ kubectl auth can-i get pods -n devteam-1 --as devteam-1@savitha-sandbox.iam.gserviceaccount.com
+#   yes
+#
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: devteam-1-deployment-admin
+  namespace: devteam-1
+subjects:
+  - kind: User
+    name: devteam-1@savitha-sandbox.iam.gserviceaccount.com
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+# Limit users in Google group "devteam-1" to read-only access to namespace "devteam-1". Basically, only
+# CI/CD can trigger deployments to the namespace, whereas users can manually view namespace resources.
+#
+# References:
+# - https://cloud.google.com/kubernetes-engine/docs/how-to/google-groups-rbac#enable
+# - https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#define-and-assign
+#
+# Steps:
+# - Create a Google group for "devteam-1" in the organization.
+# - Add "devteam-1" users to the group.
+# - Use Kubernetes RBAC (shown below) to grant the group "view" role in namespace "devteam-1".
+#
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: devteam-1-group-viewer
+  namespace: devteam-1
+subjects:
+  - kind: Group
+    name: devteam-1@myorg.com
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: view
+  apiGroup: rbac.authorization.k8s.io
