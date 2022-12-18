@@ -41,6 +41,7 @@ roleRef:
 # Steps:
 # - Create a Google group for "devteam-1" in the organization.
 # - Add "devteam-1" users to the group.
+# - Grant the group "roles/container.clusterViewer" so it can authenticate to the cluster but do nothing else.
 # - Use Kubernetes RBAC (shown below) to grant the group "view" role in namespace "devteam-1".
 #
 kind: RoleBinding

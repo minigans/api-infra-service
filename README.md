@@ -23,16 +23,16 @@ Reference: https://docs.konghq.com/kubernetes-ingress-controller/latest/guides/c
 
 ### OAuth2 authentication
 
-A better approach to authentication is to use identity federation through the OAuth2 protocol. The [oauth2-proxy.
-yaml](k8s/api-service/oauth2-proxy.yaml) manifest installs an OAuth2 proxy into the cluster. An application can 
-configure its ingress to use the proxy for authentication. If a user is not authenticated, the proxy will intercept 
-their request and delegate it to the Google Identity Provider (IdP) for authentication. After authentication, the 
-request is redirected back to the original application.
+A better, more scalable approach to authentication is to use identity federation through the OAuth2 protocol. The 
+`nginx-ingress-controller` and an OAuth2 proxy are set up on the cluster for this purpose. An application can configure 
+its ingress to use the proxy for authentication. If a user is not authenticated, the proxy will intercept their request
+and delegate it to the Google Identity Provider (IdP) for authentication. After authentication, the request is 
+redirected back to the original application.
 
 The `Kubernetes` manifests under the [oauth2-authentication-example](k8s/oauth2-authentication-example) directory 
-show how this works using the `nginx-ingress-controller`. When a user browses to https://hello.mini.ping-fuji.com, they 
-will first be redirected to authenticate using their Google credentials. The app is only presented to the user after a 
-successful login.
+show how this works using an `nginx` ingress. When a user browses to https://hello.mini.ping-fuji.com, they will first 
+be redirected to authenticate using their Google credentials. The app is only presented to the user after a successful 
+login.
 
 The picture on the left in the following diagram illustrates this flow:
 
