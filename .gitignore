@@ -6,4 +6,4 @@
 **.iml
 
 # Terraform
-.terraform*
+.terraform
