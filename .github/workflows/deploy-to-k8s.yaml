@@ -9,6 +9,7 @@ on:
 env:
   PROJECT_ID: api-service-sandbox-00
   CLUSTER: api-infra-service
+  ZONE: us-central1-a
 
 permissions:
   contents: 'read'
@@ -33,7 +34,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Set up GKE access
-        run: gcloud container clusters get-credentials "${CLUSTER}" --project "${PROJECT_ID}"
+        run: gcloud container clusters get-credentials "${CLUSTER}" --project "${PROJECT_ID}" --zone "${ZONE}"
 
       - name: Install skaffold
         run: gcloud components install skaffold
