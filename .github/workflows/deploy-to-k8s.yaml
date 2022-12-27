@@ -7,10 +7,8 @@ on:
       - main
 
 env:
-  PROJECT_ID: savitha-sandbox
-  PROJECT_NUMBER: 841033157812
-  REGION: us-central1
-  CLUSTER: savitha
+  PROJECT_ID: api-service-sandbox-00
+  CLUSTER: api-infra-service
 
 permissions:
   contents: 'read'
@@ -28,14 +26,14 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          workload_identity_provider: projects/841033157812/locations/global/workloadIdentityPools/oidc-pool/providers/github-provider
-          service_account: github@savitha-sandbox.iam.gserviceaccount.com
+          workload_identity_provider: projects/709671997536/locations/global/workloadIdentityPools/github-oidc-pool/providers/github-provider
+          service_account: github@api-service-sandbox-00.iam.gserviceaccount.com
 
       - name: Install gcloud
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Set up GKE access
-        run: gcloud container clusters get-credentials "${CLUSTER}" --region "${REGION}" --project "${PROJECT_ID}"
+        run: gcloud container clusters get-credentials "${CLUSTER}" --project "${PROJECT_ID}"
 
       - name: Install skaffold
         run: gcloud components install skaffold

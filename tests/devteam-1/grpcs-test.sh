@@ -13,8 +13,8 @@ echo
 
 grpcurl -d '{"greeting": "Kong Hello world using grcpbin ingress!"}' \
   -insecure \
-  grcpbin.mini.ping-fuji.com:443 hello.HelloService.SayHello
+  grcpbin.api.ping-fuji.com:443 hello.HelloService.SayHello
 
 grpcurl -d '{"greeting": "Kong Hello world using multi-protocol ingress!"}' \
   -insecure \
-  all.mini.ping-fuji.com:443 hello.HelloService.SayHello
+  all.api.ping-fuji.com:443 hello.HelloService.SayHello

@@ -30,7 +30,7 @@ and delegate it to the Google Identity Provider (IdP) for authentication. After 
 redirected back to the original application.
 
 The `Kubernetes` manifests under the [oauth2-authentication-example](k8s/oauth2-authentication-example) directory 
-show how this works using an `nginx` ingress. When a user browses to https://hello.mini.ping-fuji.com, they will first 
+show how this works using an `nginx` ingress. When a user browses to https://hello.api.ping-fuji.com, they will first 
 be redirected to authenticate using their Google credentials. The app is only presented to the user after a successful 
 login.
 
@@ -81,7 +81,7 @@ the HTTP case, the token must be hosted within a `.well-known` endpoint under th
 be hosted in an `_acme-challenge` TXT record under the domain. If the ACME server can read the token from the 
 well-known endpoint or the TXT record, then domain ownership is proven, and it can proceed to issuing a certificate.
 
-The `cert-manager` deployment uses a DNS solver using the `mini.ping-fuji.com` hosted zone on `Google Cloud DNS`. Any 
+The `cert-manager` deployment uses a DNS solver using the `api.ping-fuji.com` hosted zone on `Google Cloud DNS`. Any 
 ingresses using hostnames under this domain will automatically get a valid CA certificate from `Let's Encrypt` when 
 configured with the annotation `cert-manager.io/cluster-issuer: letsencrypt`.
 

@@ -9,10 +9,10 @@ spec:
   ingressClassName: kong
   tls:
     - hosts:
-        - grpcbin.mini.ping-fuji.com
+        - grpcbin.api.ping-fuji.com
       secretName: grpcbin-tls
   rules:
-    - host: grcpbin.mini.ping-fuji.com
+    - host: grcpbin.api.ping-fuji.com
       http:
         paths:
           - path: /

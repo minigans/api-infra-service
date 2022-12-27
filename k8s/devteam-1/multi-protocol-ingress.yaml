@@ -9,10 +9,10 @@ spec:
   ingressClassName: kong
   tls:
     - hosts:
-        - all.mini.ping-fuji.com
+        - all.api.ping-fuji.com
       secretName: all-tls
   rules:
-    - host: all.mini.ping-fuji.com
+    - host: all.api.ping-fuji.com
       http:
         paths:
           - path: /echo

@@ -1,4 +1,4 @@
 locals {
-  project_id     = "savitha-sandbox"
-  project_number = 841033157812
+  project_id     = "api-service-sandbox-00"
+  project_number = 709671997536
 }

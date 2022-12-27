@@ -10,10 +10,10 @@ spec:
   ingressClassName: kong
   tls:
     - hosts:
-        - dev2-httpbin.mini.ping-fuji.com
+        - dev2-httpbin.api.ping-fuji.com
       secretName: dev2-httpbin-tls
   rules:
-    - host: dev2-httpbin.mini.ping-fuji.com
+    - host: dev2-httpbin.api.ping-fuji.com
       http:
         paths:
           - path: /get
@@ -38,10 +38,10 @@ spec:
   ingressClassName: kong
   tls:
     - hosts:
-        - dev2-httpbin.mini.ping-fuji.com
+        - dev2-httpbin.api.ping-fuji.com
       secretName: dev2-httpbin-tls
   rules:
-    - host: dev2-httpbin.mini.ping-fuji.com
+    - host: dev2-httpbin.api.ping-fuji.com
       http:
         paths:
           - path: /post

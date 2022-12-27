@@ -1,9 +1,9 @@
 #!/bin/bash
 
-PROJECT_ID=savitha-sandbox
+PROJECT_ID=api-service-sandbox-00
 
-gcloud dns managed-zones create savitha \
-    --dns-name=mini.ping-fuji.com \
+gcloud dns managed-zones create api-service-zone \
+    --dns-name=api.ping-fuji.com \
     --description 'Public hosted zone for demo purposes' \
     --visibility=public \
     --project "${PROJECT_ID}"

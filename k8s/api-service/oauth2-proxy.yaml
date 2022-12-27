@@ -26,8 +26,8 @@ spec:
             - --email-domain=*
             - --upstream=file:///dev/null
             - --http-address=0.0.0.0:4180
-            - --whitelist-domain=".mini.ping-fuji.com"
-            - --cookie-domain=".mini.ping-fuji.com"
+            - --whitelist-domain=".api.ping-fuji.com"
+            - --cookie-domain=".api.ping-fuji.com"
           envFrom:
             # The following environment variables are made available through the "oauth-secrets" secret. This secret
             # was pre-created on the sandbox cluster. A better alternative is to use the external-secrets operator.
@@ -70,7 +70,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: oauth2-proxy.mini.ping-fuji.com
+    - host: oauth2-proxy.api.ping-fuji.com
       http:
         paths:
           - path: /oauth2
@@ -82,5 +82,5 @@ spec:
                   number: 4180
   tls:
     - hosts:
-        - oauth2-proxy.mini.ping-fuji.com
+        - oauth2-proxy.api.ping-fuji.com
       secretName: oauth2-proxy-cert

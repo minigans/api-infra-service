@@ -8,13 +8,13 @@ spec:
   ingressClassName: kong
   tls:
     - hosts:
-        - svc.mini.ping-fuji.com
-        - echo.mini.ping-fuji.com
-        - httpbin.mini.ping-fuji.com
+        - svc.api.ping-fuji.com
+        - echo.api.ping-fuji.com
+        - httpbin.api.ping-fuji.com
       secretName: http-tls
   rules:
     ## Different paths routing to the same backend service
-    - host: svc.mini.ping-fuji.com
+    - host: svc.api.ping-fuji.com
       http:
         paths:
           - path: /echo1
@@ -33,7 +33,7 @@ spec:
                   number: 80
 
     ## Different host headers routing to different backend services
-    - host: echo.mini.ping-fuji.com
+    - host: echo.api.ping-fuji.com
       http:
         paths:
           - path: /
@@ -44,7 +44,7 @@ spec:
                 port:
                   number: 80
 
-    - host: httpbin.mini.ping-fuji.com
+    - host: httpbin.api.ping-fuji.com
       http:
         paths:
           - path: /

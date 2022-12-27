@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Ref: https://cloud.google.com/iam/docs/configuring-workload-identity-federation#gcloud
-PROJECT_ID=savitha-sandbox
-PROJECT_NUMBER=841033157812
+PROJECT_ID=api-service-sandbox-00
+PROJECT_NUMBER=709671997536
 
 REPO=minigans/api-infra-service
 

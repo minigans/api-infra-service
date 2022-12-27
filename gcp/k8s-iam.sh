@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_ID=savitha-sandbox
+PROJECT_ID=api-service-sandbox-00
 
 ## Create GCP service accounts for external-dns and cert-manager.
 gcloud iam service-accounts create external-dns --project "${PROJECT_ID}"

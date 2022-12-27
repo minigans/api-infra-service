@@ -12,7 +12,7 @@
 # - Allow their GitHub repo to impersonate the GCP service account for CI/CD as shown in the gcp/wif.sh script.
 #
 # To verify, run:
-#   $ kubectl auth can-i get pods -n devteam-1 --as devteam-1@savitha-sandbox.iam.gserviceaccount.com
+#   $ kubectl auth can-i get pods -n devteam-1 --as devteam-1@api-service-sandbox-00.iam.gserviceaccount.com
 #   yes
 #
 kind: RoleBinding
@@ -22,7 +22,7 @@ metadata:
   namespace: devteam-1
 subjects:
   - kind: User
-    name: devteam-1@savitha-sandbox.iam.gserviceaccount.com
+    name: devteam-1@api-service-sandbox-00.iam.gserviceaccount.com
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole

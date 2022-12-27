@@ -45,10 +45,10 @@ deploy:
         setValues:
           serviceAccount:
             annotations:
-              iam\.gke\.io/gcp-service-account: "external-dns@savitha-sandbox.iam.gserviceaccount.com"
+              iam\.gke\.io/gcp-service-account: "external-dns@api-service-sandbox-00.iam.gserviceaccount.com"
           provider: google
           google:
-            project: savitha-sandbox
+            project: api-service-sandbox-00
           policy: upsert-only
 
       # https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager
@@ -61,5 +61,5 @@ deploy:
         setValues:
           serviceAccount:
             annotations:
-              iam\.gke\.io/gcp-service-account: "cert-manager@savitha-sandbox.iam.gserviceaccount.com"
+              iam\.gke\.io/gcp-service-account: "cert-manager@api-service-sandbox-00.iam.gserviceaccount.com"
           installCRDs: true
