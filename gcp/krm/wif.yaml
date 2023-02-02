@@ -1,0 +1,66 @@
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMWorkloadIdentityPool
+metadata:
+  name: github-oidc-pool
+spec:
+  location: global
+  description: 'OIDC Pool'
+  displayName: github-oidc-pool
+  projectRef:
+    external: projects/api-service-sandbox-00
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMWorkloadIdentityPoolProvider
+metadata:
+  name: github-provider
+spec:
+  projectRef:
+    external: projects/api-service-sandbox-00
+  location: global
+  workloadIdentityPoolRef:
+    name: github-oidc-pool
+  displayName: github-provider
+  description: 'GitHub provider'
+  attributeMapping:
+    attribute.actor: assertion.actor
+    attribute.repository: assertion.repository
+    google.subject: assertion.sub
+  oidc:
+    issuerUri: https://token.actions.githubusercontent.com/
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata:
+  name: github
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicy
+metadata:
+  name: github
+spec:
+  bindings:
+    - members:
+        - principalSet://iam.googleapis.com/projects/297339774046/locations/global/workloadIdentityPools/github-oidc-pool/attribute.repository/minigans/api-infra-service
+      role: roles/iam.workloadIdentityUser
+  resourceRef:
+    kind: IAMServiceAccount
+    name: github
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: github
+spec:
+  member: serviceAccount:github@api-service-sandbox-00.iam.gserviceaccount.com
+  role: roles/container.admin
+  resourceRef:
+    kind: Project
+    external: projects/api-service-sandbox-00

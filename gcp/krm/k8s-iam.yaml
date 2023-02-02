@@ -1,0 +1,69 @@
+## cert-manager
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata:
+  name: cert-manager
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicy
+metadata:
+  name: cert-manager
+spec:
+  bindings:
+    - members:
+        - serviceAccount:api-service-sandbox-00.svc.id.goog[cert-manager/cert-manager]
+      role: roles/iam.workloadIdentityUser
+  resourceRef:
+    kind: IAMServiceAccount
+    name: cert-manager
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: cert-manager
+spec:
+  member: serviceAccount:cert-manager@api-service-sandbox-00.iam.gserviceaccount.com
+  role: roles/dns.admin
+  resourceRef:
+    kind: Project
+    external: projects/api-service-sandbox-00
+
+---
+
+## external-dns
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata:
+  name: external-dns
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicy
+metadata:
+  name: external-dns
+spec:
+  bindings:
+    - members:
+        - serviceAccount:api-service-sandbox-00.svc.id.goog[external-dns/external-dns]
+      role: roles/iam.workloadIdentityUser
+  resourceRef:
+    kind: IAMServiceAccount
+    name: external-dns
+
+---
+
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: external-dns
+spec:
+  member: serviceAccount:external-dns@api-service-sandbox-00.iam.gserviceaccount.com
+  role: roles/dns.admin
+  resourceRef:
+    kind: Project
+    external: projects/api-service-sandbox-00

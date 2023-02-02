@@ -1,0 +1,37 @@
+## This YAML just shows the Kubernetes Resource Model (KRM) for the cluster. The cluster must be
+## manually created with config connector add-on installed to apply resources using their KRMs.
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: api-infra-service
+spec:
+  initialNodeCount: 3
+  location: us-central1-a
+  resourceID: api-infra-service
+  workloadIdentityConfig:
+    workloadPool: api-service-sandbox-00.svc.id.goog
+  addonsConfig:
+    configConnectorConfig:
+      enabled: true
+
+---
+
+## The following IAM must be manually run:
+
+# gcloud iam service-accounts create config-connector
+
+# gcloud projects add-iam-policy-binding api-service-sandbox-00 \
+#    --member="serviceAccount:config-connector@api-service-sandbox-00.iam.gserviceaccount.com" \
+#    --role="roles/owner"
+
+# gcloud iam service-accounts add-iam-policy-binding config-connector@api-service-sandbox-00.iam.gserviceaccount.com \
+#    --member="serviceAccount:api-service-sandbox-00.svc.id.goog[cnrm-system/cnrm-controller-manager]" \
+#    --role="roles/iam.workloadIdentityUser"
+
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnector
+metadata:
+  name: configconnector.core.cnrm.cloud.google.com
+spec:
+  mode: cluster
+  googleServiceAccount: "config-connector@api-service-sandbox-00.iam.gserviceaccount.com"

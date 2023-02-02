@@ -1,0 +1,29 @@
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: dns.googleapis.com
+spec:
+  projectRef:
+    external: '709671997536'
+
+---
+
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: cloudresourcemanager.googleapis.com
+spec:
+  projectRef:
+    external: '709671997536'
+
+
+---
+
+apiVersion: dns.cnrm.cloud.google.com/v1beta1
+kind: DNSManagedZone
+metadata:
+  name: api-service-zone
+spec:
+  description: 'Public hosted zone for demo purposes'
+  dnsName: api.ping-fuji.com.
+  visibility: public
